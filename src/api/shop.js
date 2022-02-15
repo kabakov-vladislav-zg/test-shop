@@ -1,43 +1,11 @@
 import db from '../assets/mockup/products'
 
-function throttle(func, ms) {
-  let isThrottled
-  let savedArgs
-  let timer
-
-  function wrapper(...arg) {
-
-    if (isThrottled) {
-      clearTimeout(timer)
-    }
-
-    savedArgs = arg
-    isThrottled = true
-
-    timer = setTimeout(() => {
-      isThrottled = false
-      func.apply(this, savedArgs)
-      savedArgs = timer = null
-    }, ms)
-  }
-
-  return wrapper;
+function timeout() {
+  return new Promise(resolve => setTimeout(resolve, 100));
 }
 
-class Class {
-  constructor() {
-    this._tGetProducts = throttle(this._getProducts, 500)
-  }
-
-  getProducts(commit, filter, throttle) {
-    if(throttle) {
-      this._tGetProducts(commit, filter)
-    } else {
-      this._getProducts(commit, filter)
-    }
-  }
-
-  _getProducts(commit, filter) {
+export default {
+  async getProducts(filter = '') {
     let products
     if(filter) {
       const regexp = new RegExp(filter, 'i')
@@ -45,8 +13,8 @@ class Class {
     } else {
       products = db
     }
-    commit(products)
+
+    await timeout()
+    return products
   }
 }
-
-export default new Class
