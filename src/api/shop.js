@@ -1,7 +1,7 @@
 import db from '../assets/mockup/products'
 
-function timeout() {
-  return new Promise(resolve => setTimeout(resolve, 100));
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export default {
@@ -14,7 +14,12 @@ export default {
       products = db
     }
 
-    await timeout()
+    await timeout(100)
     return products
+  },
+
+  async getProduct(slug) {
+    await timeout(50)
+    return db.find(product => product.slug === slug) || {}
   }
 }

@@ -6,7 +6,7 @@
       class=""
     >
       <img :src="product.img" alt="">
-      {{ product.title }}
+      <router-link :to="'/' + product.slug">{{ product.title }}</router-link>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
       return this.$store.state.products.list
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch('products/getProducts', this.$route.query.filter)
   },
 
