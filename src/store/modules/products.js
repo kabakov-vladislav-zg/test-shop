@@ -1,5 +1,5 @@
 import shop from '../../api/shop'
-import throttle from "../../utils/throttle";
+import throttle from "../../utils/throttle"
 
 const state = {
   list: [],
@@ -7,38 +7,34 @@ const state = {
   current: {}
 }
 const mutations = {
-  setProducts(state, products) {
-    state.list = products
+  setListProducts(state, value) {
+    state.list = value
   },
-  setFilter(state, filter) {
-    state.filter = filter
+  setCurrentFilter(state, value) {
+    state.filter = value
   },
-  setProduct(state, product) {
-    state.current = product
+  setCurrentProduct(state, value) {
+    state.current = value
   },
 }
 
 const actions = {
-  async getProducts({ commit, state }, filter = '') {
+  async getListProducts({ commit, state }, filter = '') {
     if (state.list.length && state.filter === filter) return
 
     let products = await shop.getProducts(filter)
-    commit('setFilter', filter)
-    commit('setProducts', products)
+    commit('setCurrentFilter', filter)
+    commit('setListProducts', products)
   },
 
-  async getProduct({ commit, state }, slug) {
+  async getCurrentProduct({ commit, state }, slug) {
     if (state.current.slug === slug) return
-    commit('setProduct', {})
 
-    let product = state.list.find(product => product.slug === slug)
-    if (!product) {
-      product = await shop.getProduct(slug)
-    }
-    commit('setProduct', product)
+    let product = state.list.find(product => product.slug === slug) || await shop.getProduct(slug)
+    commit('setCurrentProduct', product || {})
   }
 }
-actions.throttledGetProducts = throttle(actions.getProducts, 500)
+actions.throttledGetListProducts = throttle(actions.getListProducts, 500) // to prevent multiple requests
 
 export const products = {
   state,

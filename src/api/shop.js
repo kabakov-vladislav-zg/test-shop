@@ -1,7 +1,7 @@
 import db from '../assets/mockup/products'
 
 function timeout(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms)) // simulate api work
 }
 
 export default {
@@ -20,6 +20,6 @@ export default {
 
   async getProduct(slug) {
     await timeout(50)
-    return db.find(product => product.slug === slug) || {}
+    return db.find(product => product.slug === slug)
   }
 }

@@ -14,7 +14,7 @@
 <script>
 export default {
   name: 'Product',
-
+  components: {},
   computed: {
     product() {
       return this.$store.state.products.current
@@ -33,7 +33,7 @@ export default {
     $route: {
       immediate: true,
       handler() {
-        this.$store.dispatch('products/getProduct', this.$route.params.product)
+        this.$store.dispatch('products/getCurrentProduct', this.$route.params.product)
       }
     }
   }

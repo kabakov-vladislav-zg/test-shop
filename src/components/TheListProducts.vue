@@ -20,12 +20,12 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('products/getProducts', this.$route.query.filter)
+    this.$store.dispatch('products/getListProducts', this.$route.query.filter)
   },
 
   watch: {
     $route() {
-      this.$store.dispatch('products/throttledGetProducts', this.$route.query.filter)
+      this.$store.dispatch('products/throttledGetListProducts', this.$route.query.filter)
     }
   }
 }
