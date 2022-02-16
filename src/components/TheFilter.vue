@@ -1,6 +1,6 @@
 <template>
   <div class="the-filter container">
-    <label>Filter<input type="text" v-model="filter"></label>
+    <label>Фильтр<input type="text" v-model="filter"></label>
   </div>
 </template>
 

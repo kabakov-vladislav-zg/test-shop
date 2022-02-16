@@ -1,6 +1,6 @@
 <template>
   <div class="product container">
-    <router-link :to="goBack">go back</router-link>
+    <router-link :to="goBack">назад в каталог</router-link>
 
     <template v-if="product">
       <div class="row">

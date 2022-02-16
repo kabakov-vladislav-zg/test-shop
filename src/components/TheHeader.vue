@@ -1,6 +1,6 @@
 <template>
   <header class="the-header container">
-    <router-link to="/">Home</router-link>
+    <router-link to="/">Каталог</router-link>
   </header>
 </template>
 
