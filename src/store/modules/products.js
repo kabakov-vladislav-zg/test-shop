@@ -1,10 +1,10 @@
 import shop from '../../api/shop'
-import throttle from "../../utils/throttle"
+import throttle from "../../utils/throttleDecorator"
 
 const state = {
   list: [],
   filter: '',
-  current: {}
+  current: null
 }
 const mutations = {
   setListProducts(state, value) {
@@ -28,10 +28,10 @@ const actions = {
   },
 
   async getCurrentProduct({ commit, state }, slug) {
-    if (state.current.slug === slug) return
+    if (state.current?.slug === slug) return
 
     let product = state.list.find(product => product.slug === slug) || await shop.getProduct(slug)
-    commit('setCurrentProduct', product || {})
+    commit('setCurrentProduct', product || null)
   }
 }
 actions.throttledGetListProducts = throttle(actions.getListProducts, 500) // to prevent multiple requests

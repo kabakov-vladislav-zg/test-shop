@@ -6,6 +6,27 @@
 .container {
   margin-right: auto;
   margin-left: auto;
-  max-width: 1440px;
+  max-width: 992px;
   width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__col {
+    flex: 1 0 0;
+    max-width: 100%;
+  }
+}
+
+.stretched-link {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }

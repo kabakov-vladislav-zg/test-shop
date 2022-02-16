@@ -1,12 +1,23 @@
 <template>
   <div class="product container">
+    <router-link :to="goBack">go back</router-link>
+
     <template v-if="product">
-      <router-link :to="goBack">go back</router-link>
-      <img :src="product.img" alt="">
-      {{product.title}}
+      <div class="row">
+        <div class="row__col">
+          <img
+            :src="product.img.url"
+            :alt="product.img.alt || product.title"
+            :width="product.img.width"
+            :height="product.img.height"
+          >
+        </div>
+        <h1 class="row__col">{{product.title}}</h1>
+      </div>
     </template>
+
     <div v-else>
-      404
+      <h1>404 товар не найден</h1>
     </div>
   </div>
 </template>
@@ -14,7 +25,6 @@
 <script>
 export default {
   name: 'Product',
-  components: {},
   computed: {
     product() {
       return this.$store.state.products.current
@@ -29,7 +39,7 @@ export default {
     }
   },
 
-  watch: {
+  watch: { // in case of route from product to product
     $route: {
       immediate: true,
       handler() {

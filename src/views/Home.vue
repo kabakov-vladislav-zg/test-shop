@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1 class="container">Каталог</h1>
     <TheFilter />
     <TheListProducts />
   </div>
